@@ -1,16 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class BikeModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to="bike_image/")
 
-    class meta:
+    class Meta:
         verbose_name = "Bike"
         verbose_name_plural = "Bikes"
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 class BikeDetailModel(models.Model):
@@ -19,12 +21,12 @@ class BikeDetailModel(models.Model):
     )
     description = models.TextField()
 
-    class meta:
+    class Meta:
         verbose_name = "Bike Detail"
         verbose_name_plural = "Bike Details"
 
     def __str__(self):
-        return self.bike.name
+        return f'{self.bike.name}'
 
 
 class BikeImageModel(models.Model):
@@ -33,9 +35,9 @@ class BikeImageModel(models.Model):
     )
     image = models.ImageField(upload_to='bike_image/')
 
-    class meta:
+    class Meta:
         verbose_name = "Bike Image"
         verbose_name_plural = "Bike Images"
 
     def __str__(self):
-        return self.bike.name
+        return f'{self.bike.name}'
