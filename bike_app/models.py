@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class BikeModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to="bike_image/")
+    image = models.ImageField(upload_to="bike_image/", null=True, blank=True)
 
     class Meta:
         verbose_name = "Bike"
