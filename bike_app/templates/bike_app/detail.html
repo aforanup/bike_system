@@ -2,4 +2,11 @@
 
 {% block content %}
 <h1>Detail Page</h1>
+<p>
+    {{details.bike.name}}
+    {{details.description}}
+    {% for image in images %}
+        {{image.image}}
+    {% endfor %}
+</p>
 {% endblock %}
