@@ -30,8 +30,8 @@ class BikeDetailModel(models.Model):
 
 
 class BikeImageModel(models.Model):
-    bike_model = models.ForeignKey(
-        BikeModel, related_name="bike_images", on_delete=models.CASCADE, blank=True
+    bike = models.ForeignKey(
+        BikeModel, related_name="bike_images", on_delete=models.CASCADE, blank=True, null=True
     )
     image = models.ImageField(upload_to='bike_image/')
 

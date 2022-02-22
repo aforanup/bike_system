@@ -11,10 +11,10 @@ class BikeForm(ModelForm):
 class BikeDetailForm(ModelForm):
     class Meta:
         model = BikeDetailModel
-        exclude = ('bike')
+        exclude = ['bike']
 
 
 class BikeForm(ModelForm):
     class Meta:
         model = BikeImageModel
-        exclude = ('bike_model')
+        exclude = ['bike']
