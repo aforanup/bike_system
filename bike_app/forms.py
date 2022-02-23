@@ -5,7 +5,7 @@ from . models import BikeModel, BikeImageModel, BikeDetailModel
 class BikeForm(ModelForm):
     class Meta:
         model = BikeModel
-        fields = '__all__'
+        fields = ['name', 'image']
 
 
 class BikeDetailForm(ModelForm):

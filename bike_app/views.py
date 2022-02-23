@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.http import Http404
 from . forms import BikeForm
 from . models import BikeModel, BikeDetailModel, BikeImageModel
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, FormView
 
 
 class BikeListView(ListView):
@@ -21,14 +22,12 @@ class BikeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print("aaa", self.kwargs['pk'])
         context['details'] = BikeDetailModel.objects.get(
-            bike=int(self.kwargs['pk'])
+            bike=self.kwargs['pk']
         )
         context['images'] = BikeImageModel.objects.filter(
-            bike=int(self.kwargs['pk'])
+            bike=self.kwargs['pk']
         )
-        print(context['details'], 'bbbb')
         return context
 
 
@@ -43,6 +42,7 @@ class BikeDeleteView(DeleteView):
     template_name = 'bike_app/home.html'
 
 
-class BikeCreateView(CreateView):
+class BikeCreateView(FormView):
     form_class = BikeForm
     template_name = 'bike_app/create.html'
+    success_url = 'home'
