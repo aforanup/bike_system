@@ -15,6 +15,15 @@ class BikeModel(models.Model):
         return f'{self.name}'
 
 
+class BikeAddOns(models.Model):
+    bike_add = models.ForeignKey(
+        User, related_name='bike_addons', on_delete=models.CASCADE)
+    add_ons = models.CharField(max_length=25)
+
+    def __str__(self):
+        return f'{self.bike_add.name}{self.add_ons}'
+
+
 class BikeDetailModel(models.Model):
     bike = models.OneToOneField(
         BikeModel, related_name="bike_model", on_delete=models.CASCADE
