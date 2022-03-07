@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView, C
 
 class BikeListView(ListView):
     model = BikeModel
-    paginated_by = 4
+    paginated_by = 5
     template_name = 'bike_app/home.html'
 
     def get_context_data(self, **kwargs):
@@ -34,13 +34,13 @@ class BikeDetailView(DetailView):
 
 class DetailUpdateView(UpdateView):
     model = BikeModel
-    paginated_by = 4
     template_name = 'bike_app/home.html'
 
 
 class BikeDeleteView(DeleteView):
     model = BikeModel
-    template_name = 'bike_app/home.html'
+    template_name = 'bike_app/delete.html'
+    success_url = reverse_lazy('home')
 
 
 class BikeCreateView(CreateView):
