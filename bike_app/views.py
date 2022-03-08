@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from . forms import BikeForm
 from django.urls import reverse_lazy
 from . models import BikeModel, BikeDetailModel, BikeImageModel
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, TemplateView
 
 
 class BikeListView(ListView):
@@ -43,8 +44,9 @@ class BikeDeleteView(DeleteView):
     success_url = reverse_lazy('home')
 
 
-class BikeCreateView(CreateView):
-    model = BikeModel
-    fields = '__all__'
+class BikeCreateView(TemplateView):
     template_name = 'bike_app/create.html'
     success_url = reverse_lazy('home')
+
+    def get(self):
+        pass

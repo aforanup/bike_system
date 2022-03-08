@@ -12,6 +12,9 @@
 <div class="detail-container">
     <div>
     <h1>{{details.bike.name}}</h1>
+    <a href="{% url 'delete' details.bike.id %}" class="btn btn-primary">
+      Delete
+    </a>
         {{details.description}}
     </div>
     
