@@ -3,8 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from . forms import BikeForm
 from django.urls import reverse_lazy
-from . models import BikeModel, BikeDetailModel, BikeImageModel
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView, TemplateView
+from . models import BikeModel, BikeImageModel
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 
 
 class BikeListView(ListView):
@@ -21,12 +21,10 @@ class BikeListView(ListView):
 class BikeDetailView(DetailView):
     model = BikeModel
     template_name = 'bike_app/detail.html'
+    context_object_name = 'bike'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['details'] = BikeDetailModel.objects.get(
-            bike=self.kwargs['pk']
-        )
         context['images'] = BikeImageModel.objects.filter(
             bike=self.kwargs['pk']
         )
@@ -35,7 +33,12 @@ class BikeDetailView(DetailView):
 
 class DetailUpdateView(UpdateView):
     model = BikeModel
-    template_name = 'bike_app/home.html'
+    template_name = 'bike_app/update.html'
+    fields = ('name', 'description', 'image')
+    context_object_name = 'bike'
+
+    def get_success_url(self):
+        return reverse_lazy('details', kwargs={'pk': self.object.id})
 
 
 class BikeDeleteView(DeleteView):
@@ -44,9 +47,8 @@ class BikeDeleteView(DeleteView):
     success_url = reverse_lazy('home')
 
 
-class BikeCreateView(TemplateView):
+class BikeCreateView(CreateView, LoginRequiredMixin):
     template_name = 'bike_app/create.html'
     success_url = reverse_lazy('home')
-
-    def get(self):
-        pass
+    model = BikeModel
+    fields = ('name', 'description', 'image')

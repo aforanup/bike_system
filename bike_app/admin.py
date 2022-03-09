@@ -1,7 +1,5 @@
 from django.contrib import admin
-from . models import BikeModel, BikeImageModel, BikeDetailModel
-
+from . models import BikeModel, BikeImageModel
 
 admin.site.register(BikeModel)
-admin.site.register(BikeDetailModel)
 admin.site.register(BikeImageModel)

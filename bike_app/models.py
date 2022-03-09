@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class BikeModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=255)
+    description = models.TextField()
     image = models.ImageField(upload_to="bike_image/", null=True, blank=True)
 
     class Meta:
@@ -22,20 +23,6 @@ class BikeAddOns(models.Model):
 
     def __str__(self):
         return f'{self.bike_add.name}{self.add_ons}'
-
-
-class BikeDetailModel(models.Model):
-    bike = models.OneToOneField(
-        BikeModel, related_name="bike_model", on_delete=models.CASCADE
-    )
-    description = models.TextField()
-
-    class Meta:
-        verbose_name = "Bike Detail"
-        verbose_name_plural = "Bike Details"
-
-    def __str__(self):
-        return f'{self.bike.name}'
 
 
 class BikeImageModel(models.Model):
