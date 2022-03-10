@@ -2,12 +2,29 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_authenticated and page == 'create' %}
+<div class="form-group">
+    <form method="post" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{bike_form.as_p}}
+        <hr />
+        <span class="form">
+            {{bike_image_form.as_p}}
+        </span>
+        <input type="submit" class="btn btn-primary" value="Create"/>
+    </form>
+</div>
+
+{% elif request.user.is_authenticated and page == 'update'%}
+
 <form method="post" class="form-group">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="btn btn-primary" value="Create"/>
+    {{bike_form.as_p}}
+    <hr />
+    <input type="submit" class="btn btn-primary" value="Update"/>
+    <a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}">Cancel</a>
 </form>
+
 {% else %}
 <div class="alert alert-danger">
     What are you doing here without permission?

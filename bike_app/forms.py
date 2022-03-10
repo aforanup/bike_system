@@ -5,10 +5,10 @@ from . models import BikeModel, BikeImageModel
 class BikeForm(ModelForm):
     class Meta:
         model = BikeModel
-        fields = ['name', 'image']
+        fields = ['name', 'image', 'description']
 
 
-class BikeForm(ModelForm):
+class BikeImageForm(ModelForm):
     class Meta:
         model = BikeImageModel
-        exclude = ['bike']
+        fields = ['image']
