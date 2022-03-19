@@ -35,13 +35,6 @@ class BikeDetailView(DetailView):
         return context
 
 
-# def AddImages(request):
-#     form = BikeImageForm()
-#     if request.method == 'POST':
-#     else:
-#         return render(request, '')
-
-
 class BikeDeleteView(DeleteView):
     model = BikeModel
     template_name = 'bike_app/delete.html'
@@ -94,23 +87,10 @@ class DetailUpdateView(View):
         else:
             return render(request, self.template_name, context={"page": "create", "bike_form": bike_form})
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['page'] = 'update'
-    #     context['']
-    #     return context
 
-    # def get_success_url(self):
-    #     return reverse_lazy('details', kwargs={'pk': self.object.id})
+class LoginUserView():
+    pass
 
 
-# class BikeCreateView(CreateView, LoginRequiredMixin):
-#     template_name = 'bike_app/create.html'
-#     success_url = reverse_lazy('home')
-#     model = BikeModel
-#     fields = ('name', 'description', 'image')
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['page'] = 'create'
-#         return context
+class LogoutUserView():
+    pass
